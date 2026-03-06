@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập & Đăng ký</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #b71a1c; 
+        }
+
+        .form-section {
+            flex: 1;
+        }
+
+        .divider {
+            width: 1px;
+            background-color: #e0e0e0;
+        }
+
+        h2 {
+            color: #b71a1c;
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-size: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #b71a1c;
+            outline: none;
+            box-shadow: 0 0 5px rgba(183, 26, 28, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #b71a1c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #901516;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+            .divider {
+                width: 100%;
+                height: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-section" id="login-section">
+            <h2>Đăng Nhập</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Tên đăng nhập:</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Mật khẩu:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit">Đăng Nhập</button>
+            </form>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="form-section" id="register-section">
+            <h2>Đăng Ký Tài Khoản Mới</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-username">Tên người dùng:</label>
+                    <input type="text" id="reg-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email:</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Mật khẩu:</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm-password">Xác nhận mật khẩu:</label>
+                    <input type="password" id="reg-confirm-password" required>
+                </div>
+                <button type="submit">Đăng Ký</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+
+            if (username === '' || password === '') {
+                alert('Vui lòng điền đầy đủ Tên đăng nhập và Mật khẩu.');
+                return;
+            }
+
+            alert('Đăng nhập thành công!\nXin chào, ' + username);
+            loginForm.reset(); 
+        });
+
+        const registerForm = document.getElementById('register-form');
+
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('reg-username').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+            if (username === '' || email === '' || password === '' || confirmPassword === '') {
+                alert('Vui lòng điền đầy đủ tất cả các trường thông tin đăng ký.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Mật khẩu xác nhận không khớp. Vui lòng nhập lại!');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Mật khẩu quá ngắn. Vui lòng nhập ít nhất 6 ký tự.');
+                return;
+            }
+
+            alert('Đăng ký thành công!\nTài khoản đã được tạo cho email: ' + email);
+            registerForm.reset(); 
+        });
+    </script>
+</body>
+</html>
